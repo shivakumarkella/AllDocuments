@@ -1,0 +1,98 @@
+web driver methods:
+is_enabled 
+is_selected
+is_displayed
+.text to get the text of the element 
+.get_attribute() will returns the value of the attribute in the element
+
+topic:
+inorder to give control to the called class, we will declare the __init__ method in calling class, 
+in that for self we will assign the control
+ex :
+class willcallthis():
+	def __init__(self,control):
+		self.control=control -- now, this control we can access through out this class. in all the methods
+	def getElement(self,type,id):
+		elementID=self.control.find_element(type,id)
+
+class callingClass():
+	def callaboveClass():
+		driver=webdriver.Firefox() -- this driver will have the control on the firefox
+		instance=willcallthis(driver) -- now we are passing the control on firefox to the will call this class,
+						-- it has all access on the browser and its url now.
+		element=instance.getElement('ID','Name')
+
+topic : Building Xpath and its syntax
+
+//inputtype or tag Name  [ contains(attribute, attribute value) and contains(attribute, attribute value) and contains(attribute, attribute value). . . . so on] 
+tofind theunique element 
+example : //div[contains(@class,'shivakumar') and contains(text(),'kella')]
+
+explicit wait:
+we can wait for an element to load explicitly , instead waiting for entire DOM to be load
+can import the webdriver wait from the from 
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions 
+
+we can use the webdriverWait method , have to give the instance of the browser,waiting time,poll frequency, what to ignore the exceptions during the poll.
+        wait = WebDriverWait(driver, 10, poll_frequency=1,
+                             ignored_exceptions=[NoSuchElementException,
+                                                 ElementNotVisibleException,
+                                                 ElementNotSelectableException])
+        element = wait.until(EC.element_to_be_clickable((By.ID,
+                                                         "stopFilter_stops-0")))
+
+os.path.exists() – Returns True if path or directory does exists.
+os.path.isfile() – Returns True if path is File.
+os.path.isdir() - Returns True if path is Directory.
+pathlib.Path.exists() - Returns True if path or directory does exists.
+
+
+topic : Scrolling in the browser,
+
+by using the javascript with help of the execute_script method
+  ex : scroll down ; driver.execute_script("window.scrollby(0,10000)")
+	scroll up ; driver.execute_script("window.scrollby(0,-1000)")
+yes, we can scroll element into the view, we can achieve it with the javascript and python as well.
+	python : element.location_once_scrolled_into_view by using this property we can able to get the location of the element with X and y axis position of the element
+	javascript : driver.execute_script("arguments[0].scrollintoView(true);"element)
+how to find the size f the window,
+by javascript we can get it, driver.execute-script("return window.innerheight;") ;driver.execute-script("return window.innerWidth;")
+
+topic : switching between the windows
+yes, we can switch between the windows , and we should know/decide which one will be the parent window/handle 
+
+to get parent handle/window we use driver.current_window_handle
+
+now , if you want to know all of the handles/windows , yes we can get them by driver.window_handles
+once we  know the address of the handles with above method , we can easily switch between them by using driver.switch_to.window(<handle address/window address>)
+
+
+topic :switch to the iFrames
+we will use the driver.switch_to.frame(<iframe name/iframe Id/ifrmae Number(0---n)>)
+switch back to the original content/window/page from frame , we will use driver.switch_to.default_content()
+
+topic : work with javascript alerts
+javascript alerts will not have any id or fields to access them , so we have to deal with by switching on
+
+alertWindow=driver.switch_to.alert --->this alertWindow variable will have control on now
+alertWindow.accept() means we clicked on OK button on the alert 
+alertWindow.dismiss() means we clicked on the Cancel button on the alert/confirm window.
+
+Topic mouse Hover / Action Chain Class:
+inorder work with the mouse actions , we have to import the actionChain module from the webdriver.
+from selenium.webdriver import ActionChains
+for ActionChains Class we have to pass the browser instance i.e. Ac=ActionChains(driver) . . now we can work with the AC object.
+all the action chains will be worked only when we call them with perform method. ex: .perform()
+inorder move the mouse to the element we will use the move_to_element(<element>).perform(). . then it will move to the element , on the element also we can clcik once it moved on element.
+ex: move_to_element(element).click().perform()
+
+inorder to drag an element and drop on another element will be down by using actions.drag_and_drop(<source element>,<destination element>).perform()
+sliding will be done by actions.drag_and_drop_by_offset(<source element>,<x axisSliding Value>,<yaxis sliding vaue>).perform()
+
+
+
+
+
+
+

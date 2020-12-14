@@ -1,0 +1,6 @@
+pyCharm:
+Settings - Ctrl+ALt+S
+reload all the files from Disk -Ctrl+alt+y
+save file - Ctrl+S
+Run/execute the program-Alt+Shift+F10
+hide the panes- Shift+Esc
